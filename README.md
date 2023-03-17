@@ -45,6 +45,14 @@ anteriormente
 digite: `cd ~/Documentos`. Agora você pode alternar entre os dois diretórios
 apenas digitando `cd -`!
 
+E se eu quiser voltar para um diretório anterior ao que eu estou agora?
+Digamos que você esteja em `~/Documentos/filmes/`, e para voltar pra `Documentos`, como faz?
+
+O bash tem atalhos para voltar um diretório acima: digite `cd ..`.
+
+`..` significa "a localização do diretório pai". Enquanto isso, `.`, significa o diretório
+atual. Então, se você quiser rodar algum comando no diretório atual, apenas use: `<comando> .`.
+
 ## Manipulação de arquivos e diretórios
 
 ### `touch`
@@ -94,6 +102,19 @@ Agora, vamos criar o diretório `Filmes` dentro de `Downloads`, estando na
 > chamado `legenda`. A opção `-p` faz com que `mkdir` crie `Filmes` e todos os
 > possíveis subdiretórios que ele possua.
 > 
+> Só mais esse:
+> 
+> ```bash
+> mkdir -p ~/Documentos/{fmcc, p1, lp1, ic}
+> ```
+> 
+> Esse comando simplesmente cria os diretórios `fmcc`, `p1`, `lp1` e `ic` dentro
+> de sua pasta `Documentos`. O mesmo pode ser feito se você ir para `Documentos`
+> e, lá, criar esses diretórios.
+> 
+> Porém, algumas vezes você não quer sair de onde está, e com esse comando você
+> cria vários diretórios em uma pasta de uma vez só.
+> 
 > #### Caminhos
 > 
 > Você pôde perceber que para acessar um diretório dentro de outro, colocamos
@@ -134,3 +155,181 @@ esse arquivo e sair é muito tedioso, não?
 O comando `cat` (con**cat**enate) faz o simples trabalho de mostrar o que há
 dentro de um arquivo, imprimindo-o na tela. Isso é muito comum quando temos
 arquivos pequenos, de poucas linhas, e apenas queremos seu conteúdo. 
+
+Digamos que você quer se lembrar de uma questão que fez há alguns dias.
+`cat questão.py` te mostraria, no terminal, qual o conteúdo desse arquivo.
+
+### `less`
+
+Mas e quando o arquivo é muito grande e ainda sim apenas quero visualizá-lo,
+sem precisar de um editor de texto para abrí-lo? Bem, outra ferramenta resolve
+esse problema!
+
+`less` é um paginador, o que significa que ele mostra o conteúdo em páginas
+(você dá o scroll pelo conteúdo, e a área que preenche sua tela é uma página).
+
+Abra o seu arquivo de configuração do bash com `less ~/.bashrc` (se você estiver na *home*
+basta abrir com `less .bashrc`). Para sair, navegar para baixo aperte `j` ou a setinha
+para baixo, e para navegar para cima, `k` ou a setinha para cima. Se quiser sair, aperte
+`q`.
+
+Com o `less` é possível pesquisar por palavras no texto também: `/<termo_de_pesquisa>`
+se pesquisando de cima para baixo ou `?<termo_de_pesquisa>` se pesquisando de
+baixo para cima. Para ir e voltar em cada termo achado use `n` ou `N`, respectivamente.
+
+### `rm` & `rmdir`
+
+Aprendemos a criar arquivos e diretórios com `touch` e `mkdir`, respectivamente.
+Mas e pra apagá-los?
+
+`rm` pode ser usado para ambos os casos, embora ele seja um comando perigoso.
+Uma vez apagado, é difícil de ter um arquivo ou diretório de volta.
+
+Por conta disso, `rmdir` foi criado, e ele apaga apenas diretórios vazios.
+Crie um diretório com `mkdir foo`. Tente apagá-lo com `rm foo`.
+Você verá que não é possível, pois `foo` é um diretório. Agora, tente com 
+`rmdir foo`. Isso funciona, pois `foo` é um diretório vazio.
+
+Agora, crie um diretório chamado `bar` e, dentro dele, crie outro diretório chamado
+`foobar`. Dentro de `foobar` crie um arquivo vazio chamado `arq.xt`.
+
+Volte para sua *home* e tenta deletar o diretório `bar` com `rmdir`. Veja que não é possível,
+pois `bar` não é um diretório vazio. Para apagá-lo, vamos precisar passar algumas *opções* para
+o comando `rm`. Digite `rm -r bar`.
+
+A opção `-r` remove ***r****ecursivamente* o que está em `bar`, ou seja, `foobar` e o arquivo
+`arq.txt`.
+
+> Tenha cuidado! Esse comando pode apagar um diretório inteiro, então use-o com moderação ;)
+
+Para apagar um arquivo, usamos simplesmente `rm`. Por exemplo: `rm arquivo.txt`. Algumas vezes
+temos arquivos protegidos. Para forçar a remoção, usamos a opção `-f`: `rm -f arq_protegido.txt`.
+(Mais uma vez, cuidado! Essa opção também é perigosa.)
+
+> ### Mais uma tangente!
+> 
+> Anteriormente citamos que o comando `rm` tem *opções*. Além disso, muitos comando têm também o que chamamos
+> de *argumentos*. A estrutura de um comando é a seguinte:
+> 
+> ```
+> <comando> OPÇÕES ARGUMENTOS
+> ```
+> 
+> O número de opções e argumentos variam de comando para comando.
+> Até agora estávamos usando vários comandos, passando opções e/ou argumentos (ou
+> nenhum dos dois, como é o caso de `ls`).
+> 
+> Geralmente as opções tem duas formas: uma forma mais extensa e outra mais curta.
+> Por exemplo:
+> 
+> `mkdir -p foo/bar` ou `mkdir --parents foor/bar`.
+> 
+> Aqui, `mkdir` é apresentado com uma opção, `-p` (a forma mais curta) ou `--parents` (a forma mais extensa, *verbosa*),
+> e um argumento, `foo/bar`, o diretório `foo` e seu subdiretório `bar`. Já vimos o que essa opção faz: ela cria
+> quaisquer diretórios e subdiretórios (diretórios pais e diretórios filhos, por isso `--parents`).
+> 
+> Esse tipo de formato segue para vários outros comandos, com a opção mais verbosa iniciando com `--` e a mais curta com
+> `-`.
+> 
+> Uma coisa a se notar é que há vezes que um comando pode ter opção(ões) e/ou argumento(s) obrigatório(s) ou não.
+> Para ilustrar isso, vamos recorrer a uma frequente ajuda nossa: as páginas `man` (de *man*ual).
+> 
+> #### `man`
+> 
+> Com `man` podemos ver o manual de uso de certo programa (geralmente um programa usado no terminal).
+> As páginas `man` usam algum paginador, geralmente o `less`. Assim, tudo que aprendemos sobre `less` se
+> aplica aqui.
+> 
+> Vejamos um exemplo: `man nano`.
+> 
+> `nano` é um simples editor de texto. Por enquanto não vamos focar no `nano`, mas sim em sua página
+> `man`. Vejamos uma de sua sinopsis:
+> 
+> ```
+> nano [options] [[+line[,column]] file]
+> ```
+> 
+> Aqui, tudo que está entre colchetes é opcional. Primeiro, temos que as opções
+> são opcionais (duh!). Depois, temos algo interessante: colchetes dentro de colchetes.
+> 
+> O que esse conjunto de colchetes quer dizer é: se quisermos utilizar o *argumento* `+line`
+> (para abrir o `nano` numa linha específica), *obrigatoriamente*, precisamos passar como argumento
+> o nome do arquivo (`file`). Ainda mais: se quisermos utilizar o argumento `column` (para
+> abrir numa coluna específica), é *mandatório* utilizarmos o argumento `+line`.
+> 
+> > Veja como a sinopsis desse comando segue nossa estrutura básica, isto é
+> o comando, seguido de opções e argumentos.
+> 
+> Ou seja (obs.: `#` são comentários):
+> 
+> ```bash
+> nano +5 ~/.bashrc # válido
+> 
+> nano +5,2 ~/.bashrc # válido
+> 
+> nano +10 # inválido, pois não passamos um arquivo como argumento
+> 
+> nano 2 ~/.bashrc # inválido, por não passamos +line
+> ```
+> 
+> As páginas `man` são muito úteis, e nos ajudarão muito em saber qual opção faz *tal* ou *qual* coisa.
+> Logo, tente obter uma familiaridade com o comando `man`, pois, se você não tiver certeza o que certo comando
+> faz, a página `man` dele com certeza te esclarecerá.
+
+### `mv`
+
+Até agora sabemos como criar e deletar diretórios e arquivos. No entanto ainda faltam
+operações importantes, como mover e renomear arquivos. `mv` (*m*o*v*e) é uma faca de dois gumes,
+uma vez que ela tanto pode mover quanto renomear arquivos e diretórios.
+
+Para mover um arquivo/pasta, fazemos: `mv <arq_ou_pasta> <local>`. Ou seja, movemos `<arq_ou_pasta>` para
+`<local>`. Digamos que baixamos uma prova em PDF, e queremos movê-la de `Downloads` para `Documentos`.
+Para tal, podemos fazer: `mv Downloads/prova.pdf Documentos` (assumimos que você esteja na sua *home*).
+
+Não pode parecer, mas `mv` pode ser um pouco perigoso também. Quer dizer, e se movermos um arquivo
+`arq.txt` que está na pasta `foo` para uma pasta `bar`, sendo que na pasta `bar` já existe um arquivo com
+o mesmo nome (`arq.txt`)? O comando `mv foo/arq.txt bar/` sobrescreveria `arq.txt` de `bar` de lugar do
+`arq.txt` de `foo`.
+
+Vamos testar isso: crie os diretórios `foo` e `bar` como descrito. Além disso, crie
+arquivos vazios com mesmo nome `arq.txt` dentro de `foo` e `bar`. Agora, de dentro
+da sua *home*, faça:
+
+```bash
+echo "conteúdo de foo" > foo/arq.txt
+echo "conteúdo de bar" > bar/arq.txt
+
+mv bar/arq.txt foo/
+```
+
+Cheque o que está em foo/arq.txt agora:
+`cat foo/arq.txt`
+
+O "conteúdo de foo" foi sobrescrito!
+
+OK, mas como eu posso renomear um arquivo com um comando que move coisas?
+Simples! Para renomear, basta fazer:
+```bash
+mv <nome_atual> <novo_nome>
+```
+, em que `<nome_atual>` e `<novo_nome>` referecem-se tanto a diretórios quanto arquivos.
+
+O que estamos fazendo aqui, afinal? Bem, estamos *movendo* um arquivo/diretório existente para outro
+arquivo/diretório inexistente. Ou seja, estamos sobrescrevendo um arquivo/diretório vazio!
+
+### `cp`
+
+Outra coisa muito comum que fazemos é copiar arquivos ou pastas.
+Para fazer isso da linha de comando, usamos o comando `cp` (*c*o*p*y).
+
+Supondo que você queira copiar um arquivo como `questoes.pdf` da *home* para
+`Documentos`, basta fazer: `cp questoes.pdf Documentos/`
+
+E para diretórios? Como um diretório pode ter vários outros subdiretórios e/ou arquivos nele,
+precisamos copiar esse diretório *recursivamente*. Para isso usamos a opção `-r`, `-R` ou
+`--recursive`: `cp -r Downloads/provas/ Documentos`.
+
+Isso faria com que o diretório `Documentos` *também* tenha uma pasta chamada `provas`.
+
+Assim como `mv` pode sobrescrever um arquivo, `cp` também pode (lembre-se da situação que
+ilustramos anteriormente), então cuidado!
