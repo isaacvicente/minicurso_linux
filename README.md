@@ -26,6 +26,21 @@ Dentre os diretórios listados, muito provavelmente você verá:
 Esses também são diretórios, como você pode perceber pela cor. Logo, você pode
 pensar que nossa `home` é o diretório *pai* de Downloads, Documentos, etc.
 
+> ### Limpar a bagunça
+> 
+> Para limpar sua tela, digite o comando `clear` ou aperte `Ctrl` `l`.
+> 
+> ### Outras dicas
+> 
+> Você não acha chato ter que digitar todo o nome do diretório, arquivo ou qualquer outra coisa?
+> Bem, quando estiver usando a linha de comando, lembre-se da tecla `Tab` (a tecla que fica
+> acima do `CapsLock`). Por exemplo, digamos que você queira listar o que há em `Downloads`.
+> Faça: `ls Dow` `Tab`. Veja que o `Tab` completou o resto para você! Essa é uma das coisas
+> mais valiosas a se saber!
+> 
+> Além disso, para voltar em comandos anteriores, use a setinha para cima do seu teclado.
+> Isso é muito útil quando queremos rodar novamente comandos já utilizados.
+
 ### `cd`
 
 Se Downloads é um diretório, podemos nos mover para dentro dele. Para tal,
@@ -77,6 +92,15 @@ Fotos`.
 Agora, vamos criar o diretório `Filmes` dentro de `Downloads`, estando na
 *home*: `mkdir Downloads/Filmes`. Você muito bem poderia se mover para
 `Downloads` com `cd` e criar o diretório lá, mas isso é muito trabalho, né?
+
+Até agora usamos nomes de arquivos/diretórios que não contêm espaços. Mas
+e se eu quiser criar um que os tenha? Levianamente, alguém poderia criar
+uma pasta chamada "curso linux" fazendo: `mkdir curso linux`. Qual o problema disso?
+
+Aqui, o `mkdir` criaria *duas* pastas, uma com o nome de `curso` e outra com o nome de
+`linux`. Isso acontece porque passamos dois argumentos para `mkdir` (mais sobre isso
+mais pra frente). Assim, se quisermos criar essa pasta, basta colocar o nome da
+pasta entre aspas simples: `mkdir 'curso linux'`.
 
 
 > ### Pequena pausa!
