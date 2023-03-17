@@ -2,7 +2,14 @@
 
 Geralmente quem está iniciando com ambientes Unix (Linux, macOS, etc) e nunca teve
 nenhum contato com a linha de comando, assim quando abre o terminal, fica preso, sem
-saber para onde ir. Vamos se desprender, então:
+saber para onde ir. Vamos se desprender.
+
+Para começar, nada melhor do que saber quem é você e onde está!
+
+### `whoami`
+
+Com esse comando, você pode saber qual o nome do seu usuário.
+Digite: `whoami`. Agora você saber quem você é :)
 
 ### `pwd`
 
