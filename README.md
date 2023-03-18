@@ -128,6 +128,7 @@ pasta entre aspas simples: `mkdir 'curso linux'`.
 > ```bash
 > mkdir -p Filmes/filme{1..7}/legenda
 > ```
+>
 > Esse comando faz o seguinte: cria o diretório *pai* Filmes e todos os seus
 > *filhos* (`filme1` ... `filme7`), em que em cada um deles, há um diretório
 > chamado `legenda`. A opção `-p` faz com que `mkdir` crie `Filmes` e todos os
@@ -364,3 +365,41 @@ Isso faria com que o diretório `Documentos` *também* tenha uma pasta chamada `
 
 Assim como `mv` pode sobrescrever um arquivo, `cp` também pode (lembre-se da situação que
 ilustramos anteriormente), então cuidado!
+
+## Edição de código/texto
+
+O assunto de editores de texto é cabeludo, já que muitas pessoas defendem
+seus respectivos editores com unhas e dentes.
+
+Na matéria de LP1 vocês precisarão usar Vim! Apesar dessa obrigação, não tomem isso como
+algo chato, mas sim divertido, pois Vim é muito divertido. Eu mesmo sou suspeito a falar,
+pois gosto muito de Vim.
+
+Hoje, vamos aprender o básico sobre o uso de Vim.
+
+No Vim temos uma ideia muito incomum entre outros editores de texto: os modos.
+Vim é um editor modal, o que significa que ele tem vários modos dependendo do *estado* em
+que você está.
+
+- ****Modo normal**** - `NORMAL`: É nesse modo que você *deve* permanecer quando não estiver usandos os
+outros modos. No modo *normal* você consegue navegar pelo seu texto e fazer pequenas alterações.
+De fato, quando estamos "*codando*" o que fazemos na maior parte do tempo é analisando o código,
+fazendo pequenas mudanças para resolução de problemas, testes, etc. Para ir de qualquer
+modo ao modo *normal* você aperta a tecla `Esc`.
+
+- ****Modo inserção**** - `INSERT`: No modo *insert* você começa a escrever propriamente.
+Para acessar esse comando você pode apertar `i` no teclado. Para entrar em modo *insert*
+e ir para o final da linha, aperte `A`, para o começo da linha, `I`.
+
+- ****Modo de  comando**** -  `COMMAND`: Por ser um editor extremamente flexível e customizável
+(muito embora não pareça muito), Vim tem seus comandos próprios, que podem ser acessados da seguinte
+forma (certifique-se que você esteja no modo *normal*): `:<comando>`. Um dos comandos mais importantes
+é aquele para sair do Vim: aperte `:q` (ou `:quit`) se seu arquivo está salvo ou `:q!` (ou `:quit!`) para sair sem salvar.
+E como faço para salvar um arquivo? Da mesma forma, podemos fazer: `:w` (ou `:write`).
+Para salvar *e* sair você pode combinar dois comandos: `:wq` ou então apenas `:x`.
+
+Agora vamos de fato aprender a como usar o Vim!! Como não quero reinventar a roda, vamos usar
+um conteúdo que o próprio Vim apresenta para seus novos usuários, ensinando-os os comandos básicos.
+
+De seu terminal, digite: `vimtutor`. Leia **atenciosamente** a tudo, e faça o que for pedido.
+Tente completar todas as lições, do começo ao fim.
