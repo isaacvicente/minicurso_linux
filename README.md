@@ -366,6 +366,9 @@ Isso faria com que o diretório `Documentos` *também* tenha uma pasta chamada `
 Assim como `mv` pode sobrescrever um arquivo, `cp` também pode (lembre-se da situação que
 ilustramos anteriormente), então cuidado!
 
+> Para ter um resumo das opções de um certo comando, utilize a opção `--help`.
+> Muitos comandos têm essa opção para uma rápida olhada em suas principais opções.
+
 ## Edição de código/texto
 
 O assunto de editores de texto é cabeludo, já que muitas pessoas defendem
