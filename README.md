@@ -412,13 +412,15 @@ Isso mesmo, ele _encontra_ coisas. Vamos a alguns exemplos:
 
 Para encontrar todos os arquivos que tenham extensão _.html_ na sua home,
 rode:
-`find ~/ -name '*.html'`
+
+    find ~/ -name '*.html'
 
 Aqui, passamos o caminho (~/, isto é, sua home), uma opção (-name, dá
 match pelo nome do arquivo) e um argumento para a opção ('*.html').
 
 Você verá padrões como esse mais à frente. Vamos a outro exemplo:
-`find ~/ -maxdepth 1 -size +500k -size -10M`
+    
+    find ~/ -maxdepth 1 -size +500k -size -10M
 
 Aqui, o `find` encontra arquivos e os procura em diretórios com no máximo
 um nível de profundidade (ou seja, ele procuraria em ~/foo/ mas não em
@@ -427,7 +429,8 @@ um nível de profundidade (ou seja, ele procuraria em ~/foo/ mas não em
 
 Mais um exemplo: printar a quantidade de linhas de todos os arquivos HTML da
 sua home.
-`find ~/ -name '*.html' -exec wc -l '{}' \;`
+    
+    find ~/ -name '*.html' -exec wc -l '{}' \;
 
 Nesse comando, nois passamos todos os arquivos encontrados pelo `find`
 (nesse caso todos os arquivos HTML) e os usamos como entrada para o que
@@ -441,16 +444,19 @@ Com o `grep`, você procura por padrões (expressões regulares, ou comumente
 chamadas de _regex_) em um ou mais arquivos.
 
 Começando pelo simples:
-`grep function Main.java`
+
+    grep function Main.java
 
 Aqui, você está procurando pelo match da expressão "fuction" no arquivo
 Main.java. Outra forma de fazer a mesma coisa é:
-`cat Main.java | grep function`.
+
+    cat Main.java | grep function
 
 Você pode também usar o `grep` recursivamente num diretório, usando todos
 os arquivos desse diretório como argumentos para a expressão procurada.
 Por exemplo:
-`grep -R 'while(true)' ~/projeto/`
+
+    grep -R 'while(true)' ~/projeto/
 
 Nesse comando, você está procurando pela string "while(true)" em todos os
 arquivos de _~/projeto/_. Você pode ter alguns erros de procura em
@@ -458,11 +464,10 @@ arquivos binários (ou seja, como o `grep` está procurando em _todos_ os
 arquivos, os arquivos binários também são incluídos).
 Para consertar isso:
 
-`grep --recursive --binary-files=without-match 'while(true)' ~/projeto/`
+    grep --recursive --binary-files=without-match 'while(true)' ~/projeto/
 
 > Aqui, '--recursive' equivale a '-R', utilizamos muitas vezes a opção mais
 curta, pra evitar digitar muito.
 
 Tem vários outros exemplos possíveis, porém, recomendo você ver a página do grep e
-de outros comandos aqui mostrados.
-`man grep`
+de outros comandos aqui mostrados: `man grep`, `man find`, `man touch`, etc.
