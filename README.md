@@ -243,9 +243,7 @@ temos arquivos protegidos. Para forçar a remoção, usamos a opção `-f`: `rm 
 > Anteriormente citamos que o comando `rm` tem *opções*. Além disso, muitos comando têm também o que chamamos
 > de *argumentos*. A estrutura de um comando é a seguinte:
 > 
-> ```
-> <comando> OPÇÕES ARGUMENTOS
-> ```
+> `<comando> OPÇÕES ARGUMENTOS`
 > 
 > O número de opções e argumentos variam de comando para comando.
 > Até agora estávamos usando vários comandos, passando opções e/ou argumentos (ou
@@ -277,9 +275,7 @@ temos arquivos protegidos. Para forçar a remoção, usamos a opção `-f`: `rm 
 > `nano` é um simples editor de texto. Por enquanto não vamos focar no `nano`, mas sim em sua página
 > `man`. Vejamos uma de sua sinopsis:
 > 
-> ```
-> nano [options] [[+line[,column]] file]
-> ```
+> `nano [options] [[+line[,column]] file]`
 > 
 > Aqui, tudo que está entre colchetes é opcional. Primeiro, temos que as opções
 > são opcionais (duh!). Depois, temos algo interessante: colchetes dentro de colchetes.
@@ -294,15 +290,13 @@ temos arquivos protegidos. Para forçar a remoção, usamos a opção `-f`: `rm 
 > 
 > Ou seja (obs.: `#` são comentários):
 > 
-> ```bash
-> nano +5 ~/.bashrc # válido
+> `nano +5 ~/.bashrc # válido`
 > 
-> nano +5,2 ~/.bashrc # válido
+> `nano +5,2 ~/.bashrc # válido`
 > 
-> nano +10 # inválido, pois não passamos um arquivo como argumento
+> `nano +10 # inválido, pois não passamos um arquivo como argumento`
 > 
-> nano 2 ~/.bashrc # inválido, por não passamos +line
-> ```
+> `nano 2 ~/.bashrc # inválido, por não passamos +line`
 > 
 > As páginas `man` são muito úteis, e nos ajudarão muito em saber qual opção faz *tal* ou *qual* coisa.
 > Logo, tente obter uma familiaridade com o comando `man`, pois, se você não tiver certeza o que certo comando
@@ -341,9 +335,11 @@ O "conteúdo de foo" foi sobrescrito!
 
 OK, mas como eu posso renomear um arquivo com um comando que move coisas?
 Simples! Para renomear, basta fazer:
+
 ```bash
 mv <nome_atual> <novo_nome>
 ```
+
 , em que `<nome_atual>` e `<novo_nome>` referecem-se tanto a diretórios quanto arquivos.
 
 O que estamos fazendo aqui, afinal? Bem, estamos *movendo* um arquivo/diretório existente para outro
@@ -406,3 +402,67 @@ um conteúdo que o próprio Vim apresenta para seus novos usuários, ensinando-o
 
 De seu terminal, digite: `vimtutor`. Leia **atenciosamente** a tudo, e faça o que for pedido.
 Tente completar todas as lições, do começo ao fim.
+
+## Comandos extras
+
+### `find`
+
+Intuitivamente, você poderia dizer o que o comando `find` faz?
+Isso mesmo, ele _encontra_ coisas. Vamos a alguns exemplos:
+
+Para encontrar todos os arquivos que tenham extensão _.html_ na sua home,
+rode:
+`find ~/ -name '*.html'`
+
+Aqui, passamos o caminho (~/, isto é, sua home), uma opção (-name, dá
+match pelo nome do arquivo) e um argumento para a opção ('*.html').
+
+Você verá padrões como esse mais à frente. Vamos a outro exemplo:
+`find ~/ -maxdepth 1 -size +500k -size -10M`
+
+Aqui, o `find` encontra arquivos e os procura em diretórios com no máximo
+um nível de profundidade (ou seja, ele procuraria em ~/foo/ mas não em
+~/foo/bar/), os quais têm tamanho maior que 500kB e tamanho menor que
+10MB. Muito massa, né?
+
+Mais um exemplo: printar a quantidade de linhas de todos os arquivos HTML da
+sua home.
+`find ~/ -name '*.html' -exec wc -l '{}' \;`
+
+Nesse comando, nois passamos todos os arquivos encontrados pelo `find`
+(nesse caso todos os arquivos HTML) e os usamos como entrada para o que
+vem depois do `-exec`, que é o comando `wc -l` (que conta a quantidade de
+linhas de um arquivo). O final do comando do `find` é definido pelo `find`
+em sua man page. A saída esse comando é número ao lado do caminho absoluto
+do arquivo, sendo o número a quantidade de linhas do arquivo.
+
+## `grep`
+Com o `grep`, você procura por padrões (expressões regulares, ou comumente
+chamadas de _regex_) em um ou mais arquivos.
+
+Começando pelo simples:
+`grep function Main.java`
+
+Aqui, você está procurando pelo match da expressão "fuction" no arquivo
+Main.java. Outra forma de fazer a mesma coisa é:
+`cat Main.java | grep function`.
+
+Você pode também usar o `grep` recursivamente num diretório, usando todos
+os arquivos desse diretório como argumentos para a expressão procurada.
+Por exemplo:
+`grep -R 'while(true)' ~/projeto/`
+
+Nesse comando, você está procurando pela string "while(true)" em todos os
+arquivos de _~/projeto/_. Você pode ter alguns erros de procura em
+arquivos binários (ou seja, como o `grep` está procurando em _todos_ os
+arquivos, os arquivos binários também são incluídos).
+Para consertar isso:
+
+`grep --recursive --binary-files=without-match 'while(true)' ~/projeto/`
+
+> Aqui, '--recursive' equivale a '-R', utilizamos muitas vezes a opção mais
+curta, pra evitar digitar muito.
+
+Tem vários outros exemplos possíveis, porém, recomendo você ver a página do grep e
+de outros comandos aqui mostrados.
+`man grep`
